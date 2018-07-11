@@ -1,5 +1,6 @@
 const axios = require('axios')
 const templates = require('./templates.js')
+const apiUrl = `http://localhost:5000/api/`
 
 
 // Navbar
@@ -8,7 +9,7 @@ const templates = require('./templates.js')
 
 // Register
 
-// All Lists 
+// All Lists
 
 // Create a new Task
 
