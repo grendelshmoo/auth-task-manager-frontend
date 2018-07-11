@@ -7,7 +7,6 @@
     "dev-server": "live-server main.js",
     "build": "browserify main.js -o bundle.js",
     "watch": "watchify main.js -o bundle.js",
-    "start": "node app.js",
     "dev": "run-all \"npm run dev-server\" \"npm run watch\""
   },
   "repository": {
