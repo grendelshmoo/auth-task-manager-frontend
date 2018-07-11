@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "dev-server": "live-server main.js",
-    "build": "browserify main.js -o bundle.js",
-    "watch": "watchify main.js -o bundle.js",
+    "build": "browserify scripts/main.js -o bundle.js",
+    "watch": "watchify scripts/main.js -o bundle.js",
     "dev": "run-all \"npm run dev-server\" \"npm run watch\""
   },
   "repository": {
