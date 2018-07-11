@@ -1,6 +1,6 @@
 # auth-task-manager-frontend Project
 
-Summary will go here.
+This is a front end for the galvanize-task-manager backend API.
 
 ## Authors
 
@@ -14,6 +14,9 @@ Students at [Galvanize](https://galvanize.com)
 * HTML/CSS/JavaScript
 * [BootStrap](http://www.getbootstrap.com/) - HTML/CSS Framework
 * [Browserify](https://http://browserify.org/) - Used to provide require and build bundle.js
+* [axios](https://www.npmjs.com/package/axios) - Promise based client for the browser and node.js
+
+
 
 
 ## Acknowledgments
