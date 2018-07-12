@@ -2,11 +2,11 @@
   "name": "auth-task-manager-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "dev-server": "live-server main.js",
-    "build": "browserify scripts/main.js -o bundle.js",
-    "watch": "watchify scripts/main.js -o bundle.js",
+    "dev-server": "live-server index.html",
+    "build": "browserify scripts/main.js -o scripts/bundle.js",
+    "watch": "watchify scripts/main.js -o scripts/bundle.js",
     "dev": "run-all \"npm run dev-server\" \"npm run watch\""
   },
   "repository": {
