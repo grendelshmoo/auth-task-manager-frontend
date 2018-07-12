@@ -5,7 +5,7 @@ const apiUrl = `http://localhost:5000/api/`
 const centerColumn = document.getElementById('center-column')
 const leftColumn = document.getElementById('left-column')
 const rightColumn = document.getElementById('right-column')
-const navBar = document.getElementById('navbar-select')
+const navSelect = document.getElementById('navbar-select')
 
 // Navbar
 
