@@ -7,6 +7,9 @@ const leftColumn = document.getElementById('left-column')
 const rightColumn = document.getElementById('right-column')
 const navSelect = document.getElementById('navbar-select')
 
+
+homeView.init()
+
 // Navbar
 
 // Login

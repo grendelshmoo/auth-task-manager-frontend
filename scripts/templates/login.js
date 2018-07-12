@@ -18,7 +18,3 @@ function loginTemplate() {
   </div>
   `
 }
-
-module.exports = {
-  loginTemplate
-}
