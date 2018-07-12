@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-server": "live-server index.html",
+    "dev-server": "live-server .",
     "build": "browserify scripts/main.js -o scripts/bundle.js",
     "watch": "watchify scripts/main.js -o scripts/bundle.js",
     "dev": "run-all \"npm run dev-server\" \"npm run watch\""

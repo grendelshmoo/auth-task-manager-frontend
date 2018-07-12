@@ -1,13 +1,13 @@
 const axios = require('axios')
-const loginTemplate = require('./templates/login.js')
+const templates = require('./templates/login.js')
 const apiUrl = `http://localhost:5000/api/`
-
+const centerColumn = document.getElementById('center-column')
 
 // Navbar
 
 // Login
 
-document.getElementbyId('center-column').innerHTML = loginTemplate
+centerColumn.innerHTML = templates.loginTemplate()
 
 // Register
 
