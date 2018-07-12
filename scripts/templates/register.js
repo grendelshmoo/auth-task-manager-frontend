@@ -24,3 +24,7 @@ function registerTemplate() {
   </div>
   `
 }
+
+module.exports = {
+  registerTemplate
+}
