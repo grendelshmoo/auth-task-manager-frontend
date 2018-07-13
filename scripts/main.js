@@ -1,7 +1,6 @@
 const axios = require('axios')
 const apiUrl = `http://localhost:5000/api/`
-const templates = require('./templates/login.js')
-
+const renderLogin = require('./render/render-login')
 //DOM Targets
 const centerColumn = document.getElementById('center-column')
 const leftColumn = document.getElementById('left-column')
@@ -11,7 +10,7 @@ const navSelect = document.getElementById('navbar-select')
 
 // Navbar
 
-centerColumn.innerHTML = templates.loginTemplate()
+renderLogin();
 
 // Login
 
