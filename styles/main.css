@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Exo');
+.body {
+    font-family: 'Exo', sans-serif;
+}
+
+.form-control {
+    font-size: 12px;
+}
