@@ -6,11 +6,11 @@ function loginTemplate() {
       <form>
         <div class="form-group">
           <label>Email address</label>
-          <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter Email*">
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" class="form-control" id="login-password" placeholder="Password">
+          <input type="password" class="form-control" id="login-password" placeholder="Password*">
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
       </form>

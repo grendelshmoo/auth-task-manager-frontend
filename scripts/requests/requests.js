@@ -1,4 +1,4 @@
-baseURL = `localhost:5000`
+baseURL = `http://localhost:5000/`
 
 function getAll() {
   return axios.get(`${baseURL}/posts`)
