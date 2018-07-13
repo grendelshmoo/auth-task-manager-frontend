@@ -1,7 +1,6 @@
 const axios = require('axios')
 const renderHome = require('./render/render-home').renderHome
 
-
 //DOM Targets
 const centerColumn = document.getElementById('center-column')
 const leftColumn = document.getElementById('left-column')
