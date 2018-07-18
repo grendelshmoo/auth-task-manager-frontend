@@ -8,7 +8,7 @@ const rightColumn = document.getElementById('right-column')
 const navSelect = document.getElementById('navbar-select')
 
 
-// Render homepage view 
+// Render homepage view
 renderHome()
 
 // All Lists
