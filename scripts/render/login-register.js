@@ -15,13 +15,12 @@ function login() {
 
 		request.loginPost(email, password)
 			.then(response => {
-				console.log(response)
-				const token = localStorage.setItem('token', response.data.token)
-				return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
-					headers: {
-						authorization: `Bearer ${localStorage.getItem('token')}`
-					}
-				})
+				// return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
+				// 	headers: {
+				// 		authorization: `Bearer ${localStorage.getItem('token')}`
+				// 	}
+				// })
+				localStorage.setItem('token', response.data.token)
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()
