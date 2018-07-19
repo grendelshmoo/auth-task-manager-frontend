@@ -1,13 +1,13 @@
-const homeTemplate = require('../templates/homepage').homeTemplate
-const renderLogin = require('./render-login-register').renderLogin
-const renderRegister = require('./render-login-register').renderRegister
+// const homeTemplate = require('../templates/homepage').homeTemplate
+const renderLogin = require('./login-register').renderLogin
+const renderRegister = require('./login-register').renderRegister
 const renderTaskList = require('./render-tasklist').renderTaskList
 const renderTaskMenu = require('./render-tasklist').renderTaskMenu
-const renderLoginMenu = require('./render-login-menu.js').renderLoginMenu
+const loginNav = require('./login-nav.js').loginNav
 
 function renderHome() {
-    document.querySelector('body').innerHTML += homeTemplate();
-    renderLoginMenu();
+    // document.querySelector('body').innerHTML += homeTemplate();
+    loginNav();
     renderLogin();
     renderRegister();
     // renderTaskList()

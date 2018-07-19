@@ -1,6 +1,6 @@
-function loginmenuTemplate() {
+function loginNavTemplate() {
   return `
-  <li class="nav-item active">
+  <li class="nav-item">
     <a class="nav-link" id='login-link' href="#!/login">Login
       <span class="sr-only">(current)</span>
     </a>
@@ -12,5 +12,5 @@ function loginmenuTemplate() {
 }
 
 module.exports = {
-  loginmenuTemplate
+  loginNavTemplate
 }
