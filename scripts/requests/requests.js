@@ -1,4 +1,4 @@
-baseURL = `http://localhost:5000/`
+baseURL = `https://atm-server-g92.herokuapp.com/`
 
 function getAll() {
   return axios.get(`${baseURL}/posts`)
