@@ -1,6 +1,7 @@
 const axios = require('axios')
 baseURL = `https://atm-server-g92.herokuapp.com`
 
+
 function getAll() {
   return axios.get(`${baseURL}/posts`)
 }
@@ -58,6 +59,6 @@ module.exports = {
   create,
   update,
   destroy,
-
   loginPost
 }
+
