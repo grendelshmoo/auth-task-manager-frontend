@@ -11,10 +11,5 @@ const navSelect = document.getElementById('navbar-select')
 // Render homepage view
 renderHome()
 
-// All Lists
-
-// Create a new Task
-
-// Doing
-
-// Done
+// check if token => run task-list-success.js
+// if not token, run login() from login-register.js 

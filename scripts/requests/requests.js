@@ -35,6 +35,8 @@ function loginPost(email, password) {
   })
 }
 
+
+
 // SIGNUP 
 function singup(firstName, lastName, email, password) {
   return axios.post(`${baseURL}/api/users/login`, {
@@ -45,6 +47,10 @@ function singup(firstName, lastName, email, password) {
   })
 }
 
+// TASK LIST
+function taskList () {
+  return axios.get(`${baseURL}/api/lists`)
+}
 
 
 module.exports = {
