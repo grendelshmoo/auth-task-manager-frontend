@@ -9,6 +9,7 @@ function getTasks(token) {
         .then(res => {
             console.log(res)
             const lists = res.data.lists
+            console.log(lists)
             // render HTML for task list page with data from response 
 
             // logout function: clear out token from local storage 

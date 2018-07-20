@@ -6,7 +6,7 @@ const centerColumn = document.getElementById('center-column')
 const leftColumn = document.getElementById('left-column')
 const rightColumn = document.getElementById('right-column')
 const navSelect = document.getElementById('navbar-select')
-const getTasks = require('./render/task-lists-success')
+const getTasks = require('./render/task-lists-success').getTasks
 
 
 
@@ -18,6 +18,7 @@ if (!token) {
     // check if token exists => render all the tasks for that token 
     // run getTasks() 
     // logout function: clear out token from local storage 
+    getTasks()
 }
 
 // const token = localStorage.getItem('token')
