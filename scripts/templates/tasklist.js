@@ -9,6 +9,44 @@ function tasklistTemplate() {
   `
 }
 
+function left () {
+ return `
+  <h2 class="text-center">All Lists</h2>
+  <div class='list-group' id='left-list'>
+  </div>
+  <hr>
+  <form id='task-form'>
+    <h3>Create a New Task</h3>
+    <div class='form-group'>
+      <label for="title">Title</label>
+      <input type="text" class='form-control' id='task-title'>
+    </div>
+    <div class='form-control'>
+      <label for="description">Description</label>
+      <input type="text" class='form-control' id='task-description'>
+    </div>
+    <button type='submit' class='btn btn-success'>Create New Task</button>
+  </form>
+  `
+}
+
+function center (title, content) {
+  return `
+  <h2>Doing</h2>
+  <div class="card border-dark mb-3" style="max-width: 18rem;">
+    <div class="card-body text-dark">
+      <h2 class="card-title text-center">${title}</h2>
+      <p class='card-text'>${content}</p>
+      <button type='submit' class='btn btn-success'>Complete</button>
+    </div>
+  </div>
+  `
+}
+
+
+
 module.exports = {
-  tasklistTemplate
+  tasklistTemplate, 
+  left, 
+  center
 }

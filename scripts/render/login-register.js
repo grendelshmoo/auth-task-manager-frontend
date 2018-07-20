@@ -20,7 +20,7 @@ function login() {
 				// 		authorization: `Bearer ${localStorage.getItem('token')}`
 				// 	}
 				// })
-				localStorage.setItem('token', response.data.token)
+				const token = localStorage.setItem('token', response.data.token)
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()
