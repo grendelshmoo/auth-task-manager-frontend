@@ -1,6 +1,8 @@
 const axios = require('axios')
+const renderTaskList = require('./render-tasklist').renderTaskList
 
 function getTasks(token) {
+    renderTaskList()
     return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`

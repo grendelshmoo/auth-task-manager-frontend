@@ -22,3 +22,6 @@ if (!token) {
 }
 
 // const token = localStorage.getItem('token')
+
+// Strech goal: onHashChange() 
+// location.hash 
