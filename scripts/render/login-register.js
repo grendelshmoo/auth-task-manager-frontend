@@ -3,6 +3,7 @@ const registerTemplate = require('../templates/login-register').registerTemplate
 const loginErr = require('../templates/login-register').loginIssue
 const request = require('../requests/requests')
 const axios = require('axios')
+const getTasks = require('./task-lists-success').getTasks
 
 
 // login 
@@ -21,6 +22,9 @@ function login() {
 				// 	}
 				// })
 				const token = localStorage.setItem('token', response.data.token)
+			})
+			.then(()=> {
+				getTasks()
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()
