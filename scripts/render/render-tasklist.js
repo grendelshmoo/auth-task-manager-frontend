@@ -3,7 +3,7 @@ const taskmenuTemplate = require('../templates/tasklist-menu').tasklistMenu
 
 function renderTaskList() {
   console.log('render plz');
-  
+
   const navSelect = document.getElementById('navbar-select')
   navSelect.innerHTML = taskmenuTemplate()
 
@@ -15,6 +15,7 @@ function renderTaskList() {
   leftColumn.innerHTML = tasklistTemplate.left()
   centerColumn.innerHTML = tasklistTemplate.center()
   rightColumn.innerHTML = tasklistTemplate.tasklistTemplate()
+
 }
 
 // function renderTaskMenu() {
