@@ -38,7 +38,7 @@ function destroy(id) {
 
 // LOG IN
 function loginPost(email, password) {
-  return axios.post(`${baseURL}/api/users/login`, {
+  return axios.post(`${baseURL}/users/login`, {
     email,
     password
   })
@@ -48,7 +48,7 @@ function loginPost(email, password) {
 
 // SIGNUP
 function singup(firstName, lastName, email, password) {
-  return axios.post(`${baseURL}/api/users/login`, {
+  return axios.post(`${baseURL}/users/login`, {
     firstName,
     lastName,
     email,
@@ -58,7 +58,7 @@ function singup(firstName, lastName, email, password) {
 
 // TASK LIST
 function taskList() {
-  return axios.get(`${baseURL}/api/lists`)
+  return axios.get(`${baseURL}/lists`)
 }
 
 
