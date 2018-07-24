@@ -3,6 +3,13 @@
     font-family: 'Exo', sans-serif;
 }
 
-.form-control {
+/* .form-control {
     font-size: 12px;
+} */
+
+#task-description {
+  height: 100px;
 }
+/* #task-form {
+    height:200px;
+} */

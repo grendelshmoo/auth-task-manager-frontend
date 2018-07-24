@@ -15,24 +15,26 @@ function left() {
   <div class='list-group' id='left-list'>
   </div>
   <hr>
-  <form id='task-form'>
-    <h3>Create a New Task</h3>
-    <div class='form-group'>
-      <label for="title">Title</label>
-      <input type="text" class='form-control' id='task-title'>
-    </div>
-    <div class='form-control'>
+  <div class="card border-dark mb-3">
+  <div class="card-body text-dark m-2 p-2">
+    <form id='task-form'>
+      <h3 class="text-center">Create a New Task</h3>
+      <div class='form-group'>
+        <label for="title">Title</label>
+        <input type="text" class='form-control' id='task-title'>
+      </div>
       <label for="description">Description</label>
-      <input type="text" class='form-control' id='task-description'>
-    </div>
-    <button type='submit' class='btn btn-success'>Create New Task</button>
-  </form>
+        <input type="text" class='form-control' id='task-description'>
+      <button type='submit' class='btn btn-success m-2 p-2'>Create New Task</button>
+    </form>
+  </div>
+  </div>
   `
 }
 
 function center(title, content) {
   return `
-  <h2>Doing</h2>
+  <h2 class="text-center">Doing</h2>
  `
 }
 
@@ -64,7 +66,7 @@ function completedCards (title, content, updatedAt) {
 
 function right() {
   return `
-  <h2>Done</h2>
+  <h2 class="text-center">Done</h2>
   `
 }
 
