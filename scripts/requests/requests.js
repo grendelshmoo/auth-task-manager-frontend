@@ -1,5 +1,6 @@
 const axios = require('axios')
-baseURL = `https://atm-server-g92.herokuapp.com`
+baseURL = `https://atm-server-g92.herokuapp.com/api`
+const token = localStorage.getItem('token')
 
 
 function getAll() {
@@ -10,13 +11,21 @@ function getOne(id) {
   return axios.get(`${baseURL}/posts/${id}`)
 }
 
-function create(title, content) {
-  return axios.post(`${baseURL}/posts/`, {
-    title,
-    content
+function createTask(newTitle, newDesc, listId) {
+  return axios({
+    url: `${baseURL}/lists/${listId}/tasks`,
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+    data: {
+      title: newTitle,
+      description: newDesc,
+      list_id: listId
+    },
+    method: 'POST'
   })
+  .catch(console.log)
 }
-
 
 function update(id, body) {
   return axios.put(`${baseURL}/posts/${id}`, body)
@@ -37,7 +46,7 @@ function loginPost(email, password) {
 
 
 
-// SIGNUP 
+// SIGNUP
 function singup(firstName, lastName, email, password) {
   return axios.post(`${baseURL}/api/users/login`, {
     firstName,
@@ -48,7 +57,7 @@ function singup(firstName, lastName, email, password) {
 }
 
 // TASK LIST
-function taskList () {
+function taskList() {
   return axios.get(`${baseURL}/api/lists`)
 }
 
@@ -56,9 +65,8 @@ function taskList () {
 module.exports = {
   getAll,
   getOne,
-  create,
+  createTask,
   update,
   destroy,
   loginPost
 }
-

@@ -12,7 +12,6 @@ function getTasks(token, index = 0) {
     })
     .then(res => {
       const lists = res.data.lists
-      console.log(lists)
       renderTaskList.renderTaskList(lists)
       renderTaskList.renderPopulateLists(lists)
     })
@@ -41,3 +40,4 @@ module.exports = {
   getTasks,
   completeTask
 }
+

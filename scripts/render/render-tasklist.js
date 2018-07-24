@@ -1,5 +1,6 @@
 const tasklistTemplate = require('../templates/tasklist')
 const taskmenuTemplate = require('../templates/tasklist-menu').tasklistMenu
+const request = require('../requests/requests')
 
 const renderHome = require('./render-home').renderHome
 const centerColumn = document.getElementById('center-column')
@@ -11,7 +12,7 @@ const completeTask = require('./task-lists-success').completeTask
 
 
 function renderTaskList(lists) {
-  // set the navbar of task list 
+  // set the navbar of task list
   const navSelect = document.getElementById('navbar-select')
   navSelect.innerHTML = taskmenuTemplate()
 
@@ -23,7 +24,7 @@ function renderTaskList(lists) {
   centerColumn.innerHTML = tasklistTemplate.center()
   rightColumn.innerHTML = tasklistTemplate.right()
   populateDoingDone(lists[0])
-  console.log('I am lists[0], yayyy', lists[0])
+
 }
 
 function logOut() {
@@ -35,17 +36,11 @@ function logOut() {
   rightColumn.innerHTML = null
 }
 
-// function renderTaskMenu() {
-//   const navSelect = document.getElementById('navbar-select')
-//   navSelect.innerHTML = taskmenuTemplate()
-// }
-
 function renderListsGroupItems(lists) {
   let listView = lists.map(list => {
     return templates.listTemplate(list)
   }).join('')
 
-  console.log('Hi, there. I am a list view', listView)
   document.getElementById('left-list').innerHTML += listView
 }
 
@@ -61,9 +56,7 @@ function renderTasksById(lists) {
 
       const listItemId = event.target.dataset.id
       lists.map(list => {
-        console.log('We are inside renderTaskById')
         if (list.id === parseInt(listItemId)) {
-          console.log("The id matches and now populate Doing & Done.")
           populateDoingDone(list)
         }
       })
@@ -74,9 +67,11 @@ function renderTasksById(lists) {
 function populateDoingDone(list) {
   const tasks = list.tasks
   tasks.map(task => {
-    console.log('Iam a  task, look at me', task)
+
+ 
     if (!task.completed) {
       const singleCard = tasklistTemplate.doingCards(task.id, task.title, task.description, task.list_id, task.id, task.created_at)
+
       centerColumn.innerHTML += singleCard
     } else {
       const singleCard = tasklistTemplate.completedCards(task.id, task.title, task.description, task.updated_at)
@@ -86,6 +81,32 @@ function populateDoingDone(list) {
   // moving completed cards from doing to done
   movingDoingToDone()
 }
+
+
+function createNewTask(lists) {
+  const newTaskButton = document.getElementById('create-task-btn')
+  const activeListItem = document.querySelector('#left-list a.active')
+
+  //doesn't work... everything always selects list id 1.
+  let activeListId
+  if (activeListItem === null) {
+    activeListId = 1
+  } else {
+    activeListId = activeListItem.getAttribute('data-id')
+  }
+
+
+  newTaskButton.addEventListener('click', function() {
+
+    const listId = activeListId
+    const newTitle = document.getElementById('task-title').value
+    const newDesc = document.getElementById('task-description').value
+    console.log(newTitle, newDesc, listId)
+    request.createTask(newTitle, newDesc, listId)
+    getTasks()
+  })
+}
+
 
 function movingDoingToDone() {
   const completeBtns = Array.from(document.querySelectorAll(".complete"))
@@ -100,23 +121,10 @@ function movingDoingToDone() {
 }
 
 
-// function completeTask(listId, taskId) {
-//   const body = {
-//     'completed': true
-//   }
-//   return axios.patch(`https://atm-server-g92.herokuapp.com/api/lists/${listId}/tasks/${taskId}`, body, {
-//     headers: {
-//       authorization: `Bearer ${localStorage.getItem('token')}`
-//     }
-//   }).then(response => {
-//     // render the whole task page again. 
-//     getTasks()
-//   })
-// }
-
 function renderPopulateLists(lists) {
   renderListsGroupItems(lists)
   renderTasksById(lists)
+  createNewTask(lists)
 }
 
 module.exports = {
@@ -128,3 +136,4 @@ module.exports = {
   movingDoingToDone,
   completeTask
 }
+
