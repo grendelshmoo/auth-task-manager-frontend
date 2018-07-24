@@ -25,7 +25,7 @@ function left() {
       </div>
       <label for="description">Description</label>
         <input type="text" class='form-control' id='task-description'>
-      <button type='submit' class='btn btn-success m-2 p-2'>Create New Task</button>
+      <button id="create-task-btn" type='submit' class='btn btn-success m-2 p-2'>Create New Task</button>
     </form>
   </div>
   </div>
