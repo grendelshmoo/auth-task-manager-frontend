@@ -24,7 +24,6 @@ function renderTaskList(lists) {
   centerColumn.innerHTML = tasklistTemplate.center()
   rightColumn.innerHTML = tasklistTemplate.right()
   populateDoingDone(lists[0])
-
 }
 
 function logOut() {
@@ -68,13 +67,13 @@ function populateDoingDone(list) {
   const tasks = list.tasks
   tasks.map(task => {
 
- 
+
     if (!task.completed) {
       const singleCard = tasklistTemplate.doingCards(task.id, task.title, task.description, task.list_id, task.id, task.created_at)
 
       centerColumn.innerHTML += singleCard
     } else {
-      const singleCard = tasklistTemplate.completedCards(task.id, task.title, task.description, task.updated_at)
+      const singleCard = tasklistTemplate.completedCards(task.id, task.title, task.description, task.list_id, task.id, task.updated_at)
       rightColumn.innerHTML += singleCard
     }
   })
@@ -96,7 +95,7 @@ function createNewTask(lists) {
   }
 
 
-  newTaskButton.addEventListener('click', function() {
+  newTaskButton.addEventListener('click', function () {
 
     const listId = activeListId
     const newTitle = document.getElementById('task-title').value
@@ -136,4 +135,3 @@ module.exports = {
   movingDoingToDone,
   completeTask
 }
-

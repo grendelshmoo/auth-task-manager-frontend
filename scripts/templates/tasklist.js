@@ -51,7 +51,7 @@ function doingCards(taskId, title, content, listId, taskId, createdAt) {
 `
 }
 
-function completedCards (taskId, title, listId, taskId, content, updatedAt) {
+function completedCards (taskId, title, content, listId, taskId, updatedAt) {
   return `
   <div class="card border-dark mb-3" style="max-width: 18rem;" data-taskId="${taskId}">
   <div class="card-body text-dark">
