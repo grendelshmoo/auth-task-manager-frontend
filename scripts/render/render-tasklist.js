@@ -2,6 +2,7 @@ const tasklistTemplate = require('../templates/tasklist')
 const taskmenuTemplate = require('../templates/tasklist-menu').tasklistMenu
 const request = require('../requests/requests')
 
+
 const renderHome = require('./render-home').renderHome
 const centerColumn = document.getElementById('center-column')
 const leftColumn = document.getElementById('left-column')
@@ -88,7 +89,7 @@ function createNewTask(lists) {
 
 
   newTaskButton.addEventListener('click', function() {
-
+    const getTasks = require('./task-lists-success').getTasks
     const listId = activeListId
     const newTitle = document.getElementById('task-title').value
     const newDesc = document.getElementById('task-description').value
