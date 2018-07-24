@@ -38,26 +38,26 @@ function center(title, content) {
  `
 }
 
-function doingCards(title, content, createdAt) {
+function doingCards(taskId, title, content, listId, taskId, createdAt) {
   return `
-<div class="card border-dark mb-3" style="max-width: 18rem;">
+<div class="card border-dark mb-3" style="max-width: 18rem;" data-taskId="${taskId}">
 <div class="card-body text-dark">
   <h2 class="card-title text-center">${title}</h2>
   <p class='card-text'>${content}</p>
-  <button type='submit' class='btn btn-success'>Complete</button>
+  <button type='submit' class='btn btn-success complete' data-listId='${listId}' data-taskId='${taskId}'>Complete</button>
 </div>
 <div class="card-footer bg-transparent border-success">${createdAt}</div>
 </div>
 `
 }
 
-function completedCards (title, content, updatedAt) {
+function completedCards (taskId, title, listId, taskId, content, updatedAt) {
   return `
-  <div class="card border-dark mb-3" style="max-width: 18rem;">
+  <div class="card border-dark mb-3" style="max-width: 18rem;" data-taskId="${taskId}">
   <div class="card-body text-dark">
     <h2 class="card-title text-center">${title}</h2>
     <p class='card-text'>${content}</p>
-    <button type='submit' class='btn btn-danger'>Complete</button>
+    <button type='submit' class='btn btn-danger' data-listId='${listId}' data-taskId='${taskId}'>Remove</button>
   </div>
   <div class="card-footer bg-transparent border-success">${updatedAt}</div>
   </div>
