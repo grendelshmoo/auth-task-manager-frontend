@@ -9,8 +9,8 @@ function tasklistTemplate() {
   `
 }
 
-function left () {
- return `
+function left() {
+  return `
   <h2 class="text-center">All Lists</h2>
   <div class='list-group' id='left-list'>
   </div>
@@ -30,23 +30,51 @@ function left () {
   `
 }
 
-function center (title, content) {
+function center(title, content) {
   return `
   <h2>Doing</h2>
+ `
+}
+
+function doingCards(title, content, createdAt) {
+  return `
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+<div class="card-body text-dark">
+  <h2 class="card-title text-center">${title}</h2>
+  <p class='card-text'>${content}</p>
+  <button type='submit' class='btn btn-success'>Complete</button>
+</div>
+<div class="card-footer bg-transparent border-success">${createdAt}</div>
+</div>
+`
+}
+
+function completedCards (title, content, updatedAt) {
+  return `
   <div class="card border-dark mb-3" style="max-width: 18rem;">
-    <div class="card-body text-dark">
-      <h2 class="card-title text-center">${title}</h2>
-      <p class='card-text'>${content}</p>
-      <button type='submit' class='btn btn-success'>Complete</button>
-    </div>
+  <div class="card-body text-dark">
+    <h2 class="card-title text-center">${title}</h2>
+    <p class='card-text'>${content}</p>
+    <button type='submit' class='btn btn-danger'>Complete</button>
   </div>
+  <div class="card-footer bg-transparent border-success">${updatedAt}</div>
+  </div>
+  `
+}
+
+function right() {
+  return `
+  <h2>Done</h2>
   `
 }
 
 
 
 module.exports = {
-  tasklistTemplate, 
-  left, 
-  center
+  tasklistTemplate,
+  left,
+  center,
+  right,
+  doingCards,
+  completedCards
 }
