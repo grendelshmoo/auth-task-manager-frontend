@@ -18,7 +18,7 @@ if (!token) {
     // check if token exists => render all the tasks for that token
     // run getTasks()
     // logout function: clear out token from local storage
-    getTasks(1)
+    getTasks()
 }
 
 // const token = localStorage.getItem('token')
