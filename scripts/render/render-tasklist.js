@@ -8,7 +8,6 @@ const leftColumn = document.getElementById('left-column')
 const rightColumn = document.getElementById('right-column')
 const templates = require('../templates/lists')
 
-const completeTask = require('./task-lists-success').completeTask
 
 
 function renderTaskList(lists) {
@@ -108,13 +107,14 @@ function createNewTask(lists) {
 
 
 function movingDoingToDone() {
+  const completeTask = require('./task-lists-success').completeTask
+
   const completeBtns = Array.from(document.querySelectorAll(".complete"))
   completeBtns.map(btn => {
     btn.addEventListener('click', function (event) {
       const taskId = event.target.dataset.taskid
       const listId = event.target.dataset.listid
-      const token = localStorage.getItem('token')
-      completeTask(listId, taskId, token)
+      completeTask(listId, taskId)
     })
   })
 }
@@ -133,5 +133,4 @@ module.exports = {
   populateDoingDone,
   renderPopulateLists,
   movingDoingToDone,
-  completeTask
 }
