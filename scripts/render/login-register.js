@@ -5,7 +5,7 @@ const request = require('../requests/requests')
 const getTasks = require('./task-lists-success').getTasks
 const register = require('../register/register').register
 
-// login 
+// login
 function login() {
 	document.querySelector('#login-form').addEventListener('submit', function (event) {
 		event.preventDefault()
@@ -18,7 +18,7 @@ function login() {
 				const token = localStorage.setItem('token', response.data.token)
 			})
 			.then(() => {
-				getTasks()
+				getTasks(1)
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()
