@@ -2,9 +2,8 @@ const loginTemplate = require('../templates/login-register').loginTemplate
 const registerTemplate = require('../templates/login-register').registerTemplate
 const loginErr = require('../templates/login-register').loginIssue
 const request = require('../requests/requests')
-const axios = require('axios')
 const getTasks = require('./task-lists-success').getTasks
-
+const register = require('../register/register').register
 
 // login 
 function login() {
@@ -16,14 +15,9 @@ function login() {
 
 		request.loginPost(email, password)
 			.then(response => {
-				// return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
-				// 	headers: {
-				// 		authorization: `Bearer ${localStorage.getItem('token')}`
-				// 	}
-				// })
 				const token = localStorage.setItem('token', response.data.token)
 			})
-			.then(()=> {
+			.then(() => {
 				getTasks()
 			})
 			.catch(error => {
@@ -31,22 +25,6 @@ function login() {
 			})
 	})
 }
-
-
-// Wes's example in class
-/*
-axios.post(`${baseURL}/api/users/login`, {
-    email: 'student@galvanize.com',
-    password: 'password'
-}).then(response => {
-    const token = localStorage.setItem('token', response.data.token)
-    return axios.get('http://localhost:5000/api/lists', {
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-    })
-}).then(console.log)
-*/
 
 function renderLogin() {
 	const centerColumn = document.getElementById('center-column')
@@ -63,6 +41,7 @@ function renderRegister() {
 	const registerLink = document.getElementById('register-link')
 	registerLink.addEventListener('click', function (event) {
 		centerColumn.innerHTML = registerTemplate()
+		register()
 		location.hash = '/register'
 	})
 }

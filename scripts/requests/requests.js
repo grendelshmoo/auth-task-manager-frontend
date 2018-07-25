@@ -13,18 +13,18 @@ function getOne(id) {
 
 function createTask(newTitle, newDesc, listId) {
   return axios({
-    url: `${baseURL}/lists/${listId}/tasks`,
-    headers: {
-      authorization: `Bearer ${token}`
-    },
-    data: {
-      title: newTitle,
-      description: newDesc,
-      list_id: listId
-    },
-    method: 'POST'
-  })
-  .catch(console.log)
+      url: `${baseURL}/lists/${listId}/tasks`,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      data: {
+        title: newTitle,
+        description: newDesc,
+        list_id: listId
+      },
+      method: 'POST'
+    })
+    .catch(console.log)
 }
 
 function update(id, body) {
@@ -45,14 +45,13 @@ function loginPost(email, password) {
 }
 
 
-
 // SIGNUP
 function singup(firstName, lastName, email, password) {
-  return axios.post(`${baseURL}/users/login`, {
-    firstName,
-    lastName,
-    email,
-    password
+  return axios.post(`${baseURL}/users/signup`, {
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    password: password
   })
 }
 
@@ -68,5 +67,6 @@ module.exports = {
   createTask,
   update,
   destroy,
-  loginPost
+  loginPost,
+  singup
 }
