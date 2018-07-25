@@ -3,6 +3,10 @@
     font-family: 'Exo', sans-serif;
 }
 
+a span {
+  float: right;
+}
+
 /* .form-control {
     font-size: 12px;
 } */

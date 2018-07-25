@@ -45,6 +45,7 @@ function renderListsGroupItems(lists) {
     if (list.id === taskListId) {
       isActive = 'active'
     }
+
     return templates.listTemplate(list, isActive)
   }).join('')
 
@@ -72,6 +73,11 @@ function renderTasksById(lists) {
       })
     })
   })
+  const removeButtons = Array.from(document.querySelectorAll('#remove-list-button'))
+  
+
+
+
 }
 
 function addActive() {
