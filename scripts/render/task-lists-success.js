@@ -10,8 +10,8 @@ function getTasks(activeListId) {
     })
     .then(res => {
       const lists = res.data.lists
-      const activeList = lists.find(ele => ele.id === activeListId)
-      console.log(activeList, activeListId)
+      const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
+      console.log(lists, activeListId)
       renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
       renderTaskList.renderPopulateLists(lists)
     })

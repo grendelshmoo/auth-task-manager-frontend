@@ -18,7 +18,7 @@ function login() {
 				const token = localStorage.setItem('token', response.data.token)
 			})
 			.then(() => {
-				getTasks(1)
+				getTasks()
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()
