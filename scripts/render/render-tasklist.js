@@ -11,7 +11,7 @@ const templates = require('../templates/lists')
 // **** Render the first list ****
 
 function renderTaskListPage() {
-  // set the navbar 
+  // set the navbar
   const navSelect = document.getElementById('navbar-select')
   navSelect.innerHTML = taskmenuTemplate()
 
@@ -23,9 +23,10 @@ function renderTaskListPage() {
   rightColumn.innerHTML = tasklistTemplate.right()
 }
 
-function renderTaskList(lists) {
+function renderTaskList(tasks) {
   renderTaskListPage()
-  populateDoingDone(lists[0])
+  populateTaskList(tasks)
+
 }
 
 function logOut() {
@@ -37,16 +38,22 @@ function logOut() {
   rightColumn.innerHTML = null
 }
 
-// render the list group on the left 
+// render the list group on the left
 function renderListsGroupItems(lists) {
   let listView = lists.map(list => {
-    return templates.listTemplate(list)
+  let isActive = ''
+    if (list.id === taskListId) {
+      isActive = 'active'
+    }
+    return templates.listTemplate(list, isActive)
   }).join('')
+
+
 
   document.getElementById('left-list').innerHTML += listView
 }
 
-// render center and right column with the coressponding id 
+// render center and right column with the coressponding id
 function renderTasksById(lists) {
   const aTags = Array.from(document.querySelectorAll('a.list-group-item'))
   aTags.map(el => {
@@ -60,7 +67,7 @@ function renderTasksById(lists) {
       const listItemId = event.target.dataset.id
       lists.map(list => {
         if (list.id === parseInt(listItemId)) {
-          populateDoingDone(list)
+          populateTaskList(list.tasks)
         }
       })
     })
@@ -72,13 +79,13 @@ function addActive() {
   aTags[0].classList.add('active')
 }
 
-// ***** Create global variable ***** 
-let taskListId
+// ***** Create global variable *****
+let taskListId = 1
 
-function populateDoingDone(list) {
-  const tasks = list.tasks
+function populateTaskList(tasks) {
+  // const tasks = list.tasks
   tasks.map(task => {
-    // change global variable taskListId here, which is the list id 
+    // change global variable taskListId here, which is the list id
     taskListId = task.list_id
 
     if (!task.completed) {
@@ -96,14 +103,16 @@ function populateDoingDone(list) {
 
 
 function createNewTask(lists) {
-  const getTasks = require('./task-lists-success').getTasksAfter
+  const getTasks = require('./task-lists-success').getTasks
   const taskForm = document.querySelector('#task-form')
-  taskForm.addEventListener('submit', function () {
+  taskForm.addEventListener('submit', function (e) {
+    e.preventDefault()
     const newTitle = document.getElementById('task-title').value
     const newDesc = document.getElementById('task-description').value
     console.log("I am a taskListId", taskListId)
     request.createTask(newTitle, newDesc, taskListId)
-    getTasks() // something is wrong here. Need to render list 2 correctly. 
+    .then(() => getTasks(taskListId))
+
   })
 }
 
@@ -115,7 +124,7 @@ function movingDoingToDone() {
   completeBtns.map(btn => {
     btn.addEventListener('click', function (event) {
       const taskId = event.target.dataset.taskid
-      const listId = event.target.dataset.listid
+      const listId = parseInt(event.target.dataset.listid)
       completeTask(listId, taskId)
     })
   })
@@ -126,7 +135,7 @@ function renderPopulateLists(lists) {
   renderListsGroupItems(lists)
   renderTasksById(lists)
   createNewTask(lists)
-  addActive()
+  // addActive()
 }
 
 module.exports = {
@@ -134,7 +143,7 @@ module.exports = {
   renderTasksById,
   renderTaskList,
   renderTaskListPage,
-  populateDoingDone,
+  populateTaskList,
   renderPopulateLists,
   movingDoingToDone,
 }

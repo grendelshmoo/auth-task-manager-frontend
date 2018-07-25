@@ -12,16 +12,16 @@ const getTasks = require('./render/task-lists-success').getTasks
 
 const token = localStorage.getItem('token')
 if (!token) {
-    // Render homepage view only if there is no token. 
+    // Render homepage view only if there is no token.
     renderHome()
 } else {
-    // check if token exists => render all the tasks for that token 
-    // run getTasks() 
-    // logout function: clear out token from local storage 
-    getTasks()
+    // check if token exists => render all the tasks for that token
+    // run getTasks()
+    // logout function: clear out token from local storage
+    getTasks(1)
 }
 
 // const token = localStorage.getItem('token')
 
-// Strech goal: onHashChange() 
-// location.hash 
+// Strech goal: onHashChange()
+// location.hash

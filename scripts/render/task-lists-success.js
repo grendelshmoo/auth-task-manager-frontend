@@ -2,7 +2,7 @@ const axios = require('axios')
 const renderTaskList = require('./render-tasklist')
 const templates = require('../templates/lists')
 
-function getTasks(token, index = 0) {
+function getTasks(activeListId) {
   return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`
@@ -10,10 +10,31 @@ function getTasks(token, index = 0) {
     })
     .then(res => {
       const lists = res.data.lists
-      renderTaskList.renderTaskList(lists) // no one clicks the page, render the first item
+      const activeList = lists.find(ele => ele.id === activeListId)
+      console.log(activeList, activeListId)
+      renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
       renderTaskList.renderPopulateLists(lists)
     })
 }
+
+// function getTasksByList(id) {
+//   return axios.get(`https://atm-server-g92.herokuapp.com/api/lists/${id}/tasks`, {
+//       headers: {
+//         authorization: `Bearer ${localStorage.getItem('token')}`
+//       }
+//     })
+//     .then(res => {
+//       const tasks = res.data
+//       renderTaskList.renderTaskList(tasks)
+//
+//     })
+// }
+//  getTasksByList
+//  take specific list ID and gets tasks associated with that.
+//
+
+
+
 
 // function getTasksAfterCreated () {
 //   return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
@@ -38,19 +59,19 @@ function completeTask(listId, taskId) {
       authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }).then(response => {
-    // render the whole task page again. 
-    getTasks() 
+    // render the whole task page again.
+    getTasks(listId)
   })
 }
 
 
 function deleteTask () {
-  
+
 }
 
 module.exports = {
   getTasks,
   completeTask,
+  // getTasksByList
  // getTasksAfterCreated
 }
-
