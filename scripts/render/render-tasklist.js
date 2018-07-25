@@ -96,7 +96,7 @@ function createNewTask(lists) {
 
 
   newTaskButton.addEventListener('click', function () {
-
+    const getTasks = require('./task-lists-success').getTasks
     const listId = activeListId
     const newTitle = document.getElementById('task-title').value
     const newDesc = document.getElementById('task-description').value

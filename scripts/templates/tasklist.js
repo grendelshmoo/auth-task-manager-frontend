@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 function tasklistTemplate() {
   return `
   <h2 class="text-center">Doing</h2>
@@ -46,12 +48,12 @@ function doingCards(taskId, title, content, listId, taskId, createdAt) {
   <p class='card-text'>${content}</p>
   <button type='submit' class='btn btn-success complete' data-listId='${listId}' data-taskId='${taskId}'>Complete</button>
 </div>
-<div class="card-footer bg-transparent border-success">${createdAt}</div>
+<div class="card-footer bg-transparent border-success"> Created ${moment(createdAt).fromNow(true)} ago</div>
 </div>
 `
 }
 
-function completedCards (taskId, title, content, listId, taskId, updatedAt) {
+function completedCards(taskId, title, content, listId, taskId, updatedAt) {
   return `
   <div class="card border-dark mb-3" style="max-width: 18rem;" data-taskId="${taskId}">
   <div class="card-body text-dark">
@@ -59,7 +61,7 @@ function completedCards (taskId, title, content, listId, taskId, updatedAt) {
     <p class='card-text'>${content}</p>
     <button type='submit' class='btn btn-danger' data-listId='${listId}' data-taskId='${taskId}'>Remove</button>
   </div>
-  <div class="card-footer bg-transparent border-success">${updatedAt}</div>
+  <div class="card-footer bg-transparent border-success">Updated ${moment(updatedAt).fromNow(true)} ago</div>
   </div>
   `
 }
