@@ -17,16 +17,14 @@ function renderTaskListPage() {
 
   const logoutSelect = document.getElementById('logout-link')
   logoutSelect.addEventListener('click', logOut)
-
-  leftColumn.innerHTML = tasklistTemplate.left()
-  centerColumn.innerHTML = tasklistTemplate.center()
-  rightColumn.innerHTML = tasklistTemplate.right()
 }
 
 function renderTaskList(tasks) {
   renderTaskListPage()
+  leftColumn.innerHTML = tasklistTemplate.left()
+  centerColumn.innerHTML = tasklistTemplate.center()
+  rightColumn.innerHTML = tasklistTemplate.right()
   populateTaskList(tasks)
-
 }
 
 function logOut() {
@@ -41,7 +39,7 @@ function logOut() {
 // render the list group on the left
 function renderListsGroupItems(lists) {
   let listView = lists.map(list => {
-  let isActive = ''
+    let isActive = ''
     if (list.id === taskListId) {
       isActive = 'active'
     }
@@ -111,8 +109,7 @@ function createNewTask(lists) {
     const newDesc = document.getElementById('task-description').value
     console.log("I am a taskListId", taskListId)
     request.createTask(newTitle, newDesc, taskListId)
-    .then(() => getTasks(taskListId))
-
+      .then(() => getTasks(taskListId))
   })
 }
 

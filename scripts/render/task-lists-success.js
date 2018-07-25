@@ -1,6 +1,7 @@
 const axios = require('axios')
 const renderTaskList = require('./render-tasklist')
 const templates = require('../templates/lists')
+const renderNewList = require('../create-list/new-list').newList
 
 function getTasks(activeListId) {
   return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
@@ -10,45 +11,19 @@ function getTasks(activeListId) {
     })
     .then(res => {
       const lists = res.data.lists
-      const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
-      console.log(lists, activeListId)
-      renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
-      renderTaskList.renderPopulateLists(lists)
+      if (lists.length === 0) {
+        console.log('The list is empty right now.')
+        renderTaskList.renderTaskListPage()
+
+        //renderNewList()
+      } else {
+        const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
+        console.log(lists, activeListId)
+        renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
+        renderTaskList.renderPopulateLists(lists)
+      }
     })
 }
-
-// function getTasksByList(id) {
-//   return axios.get(`https://atm-server-g92.herokuapp.com/api/lists/${id}/tasks`, {
-//       headers: {
-//         authorization: `Bearer ${localStorage.getItem('token')}`
-//       }
-//     })
-//     .then(res => {
-//       const tasks = res.data
-//       renderTaskList.renderTaskList(tasks)
-//
-//     })
-// }
-//  getTasksByList
-//  take specific list ID and gets tasks associated with that.
-//
-
-
-
-
-// function getTasksAfterCreated () {
-//   return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
-//     headers: {
-//       authorization: `Bearer ${localStorage.getItem('token')}`
-//     }
-//   }).then(res => {
-//     const lists = res.data.lists
-//     // renderTaskList.renderTaskListPage()
-//     renderTaskList.renderPopulateLists(lists)
-//   })
-// }
-
-
 
 function completeTask(listId, taskId) {
   const body = {
@@ -65,7 +40,7 @@ function completeTask(listId, taskId) {
 }
 
 
-function deleteTask () {
+function deleteTask() {
 
 }
 
@@ -73,5 +48,5 @@ module.exports = {
   getTasks,
   completeTask,
   // getTasksByList
- // getTasksAfterCreated
+  // getTasksAfterCreated
 }

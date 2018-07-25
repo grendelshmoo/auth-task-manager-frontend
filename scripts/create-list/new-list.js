@@ -1,12 +1,12 @@
 const createList = document.querySelector('#new-list-link')
 const taskmenuTemplate = require('../templates/tasklist-menu').tasklistMenu
-const newList = require('../templates/new-list').newList()
+const newListLink = require('../templates/new-list').newList()
 
 function newList() {
     createList.addEventListener('click', function (event) {
         document.querySelector('body').innerHTML = ''
         document.querySelector('body').innerHTML += taskmenuTemplate
-        document.querySelector('body').innerHTML += newList
+        document.querySelector('body').innerHTML += newListLink
         console.log('You are clicking new list')
     })
 }
