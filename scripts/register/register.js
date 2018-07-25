@@ -17,7 +17,7 @@ function register() {
         const confirmed = document.querySelector('#password-confirm')
         if (pass.value === confirmed.value) {
             console.log("This is register")
-            request.singup(firstName, lastName, email, password)
+            request.signup(firstName, lastName, email, password)
                 .then(response => {
                     const token = localStorage.setItem('token', response.data.token)
                     console.log('Hey there, look at me')
@@ -27,6 +27,7 @@ function register() {
                     renderTaskListPage()
                 })
                 .then(() => {
+                    // finish new list function before forwarding to it here.
                     renderNewList()
                 })
                 .catch(err => {

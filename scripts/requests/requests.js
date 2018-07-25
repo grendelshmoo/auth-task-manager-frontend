@@ -46,7 +46,7 @@ function loginPost(email, password) {
 
 
 // SIGNUP
-function singup(firstName, lastName, email, password) {
+function signup(firstName, lastName, email, password) {
   return axios.post(`${baseURL}/users/signup`, {
     first_name: firstName,
     last_name: lastName,
@@ -68,5 +68,5 @@ module.exports = {
   update,
   destroy,
   loginPost,
-  singup
+  signup
 }
