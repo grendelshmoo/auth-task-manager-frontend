@@ -19,15 +19,13 @@ function createTask(newTitle, newDesc, listId) {
 }
 
 function destroyList(id) {
-  return axios({
-    url: `${baseURL}/lists/${id}`,
-    headers: {
-      authorization: `Bearer ${token}`
-    },
-    method: 'DELETE'
-  })
-  // .then(() => getTasks())
-  .catch(console.log)
+  return axios(`${baseURL}/lists/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      method: 'DELETE'
+    })
+    // .then(() => getTasks())
 }
 
 function finishTask(listId, taskId) {
@@ -54,20 +52,15 @@ function createNewList(newTitle) {
   })
 }
 
-function update(id, body) {
-  return axios.put(`${baseURL}/posts/${id}`, body)
-}
-
 function destroyTask(listId, taskId) {
-  return axios({
-    url: `${baseURL}/lists/${listId}/tasks/${taskId}`,
-    headers: {
-      authorization: `Bearer ${token}`
-    },
-    method: 'DELETE'
-  })
-  // .then(() => taskP())
-  .catch(console.log)
+
+  return axios(`${baseURL}/lists/${listId}/tasks/${taskId}`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      method: 'DELETE'
+    })
+    // .then(() => getTasks())
 
 }
 

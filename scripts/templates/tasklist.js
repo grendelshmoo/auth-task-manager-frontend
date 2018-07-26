@@ -59,7 +59,7 @@ function completedCards(taskId, title, content, listId, taskId, updatedAt) {
   <div class="card-body text-dark">
     <h2 class="card-title text-center">${title}</h2>
     <p class='card-text'>${content}</p>
-    <button type='submit' class='btn btn-danger' data-listId='${listId}' data-taskId='${taskId}'>Remove</button>
+    <button type='submit' class='btn btn-danger remove' data-listId='${listId}' data-taskId='${taskId}'>Remove</button>
   </div>
   <div class="card-footer bg-transparent border-success">Updated ${moment(updatedAt).fromNow(true)} ago</div>
   </div>
