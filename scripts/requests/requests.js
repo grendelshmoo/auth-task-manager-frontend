@@ -3,8 +3,7 @@ baseURL = `https://atm-server-g92.herokuapp.com/api`
 const token = localStorage.getItem('token')
 
 function createTask(newTitle, newDesc, listId) {
-  return axios({
-      url: `${baseURL}/lists/${listId}/tasks`,
+  return axios(`${baseURL}/lists/${listId}/tasks`, {
       headers: {
         authorization: `Bearer ${token}`
       },
@@ -19,17 +18,15 @@ function createTask(newTitle, newDesc, listId) {
 }
 
 function createNewList(newTitle) {
-  return axios({
-      url: `${baseURL}/lists`,
-      headers: {
-        authorization: `Bearer ${token}`
-      },
-      data: {
-        title: newTitle
-      },
-      method: "POST"
-    })
-    .catch(console.log)
+  return axios(`${baseURL}/lists`, {
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+    data: {
+      title: newTitle
+    },
+    method: "POST"
+  })
 }
 
 function update(id, body) {
@@ -37,7 +34,14 @@ function update(id, body) {
 }
 
 function destroy(id) {
-  return axios.delete(`${baseURL}/posts/${id}`)
+  return axios(`${baseURL}/lists/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      method: 'DELETE'
+    })
+    // .then(() => getTasks())
+    .catch(console.log)
 }
 
 
@@ -68,7 +72,6 @@ function taskList() {
 
 module.exports = {
   createTask,
-  update,
   destroy,
   loginPost,
   signup,

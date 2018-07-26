@@ -72,9 +72,14 @@ function renderTasksById(lists) {
     })
   })
   const removeButtons = Array.from(document.querySelectorAll('#remove-list-button'))
-  
+  removeButtons.map(el => {
 
-
+    el.addEventListener('click', (e) => {
+      let listId = e.target.dataset.id
+      request.destroy(listId)
+      console.log('destroyed')
+    })
+  })
 
 }
 

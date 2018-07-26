@@ -3,7 +3,6 @@ const newListLink = require('../templates/new-list').newList()
 const createNewList = require('../requests/requests').createNewList
 
 
-
 function newList(leftColumn, centerColumn, rightColumn) {
     const createList = document.querySelector('#new-list-link')
     console.log("This is newList")
@@ -11,11 +10,24 @@ function newList(leftColumn, centerColumn, rightColumn) {
         leftColumn.innerHTML = ''
         centerColumn.innerHTML = newListLink
         rightColumn.innerHTML = ''
-        const newTitle = document.querySelector('#new-list').value
-        console.log(newTitle)
-        createNewList(newTitle).then(response => {
-            console.log("Hi there.")
-        })
+        formNewList(centerColumn)
+    })
+}
+
+function formNewList(centerColumn) {
+    document.querySelector('#create-new-list').addEventListener('submit', function (event) {
+        const newTitle = event.target.newList.value
+        createNewList(newTitle)
+            .then(response => {
+                const getTasks = require('../render/task-lists-success').getTasks
+                console.log("My name is getTasks", getTasks)
+                console.log(response)
+                centerColumn.innerHTML = ''
+
+                // re-render the page 
+                getTasks()
+            })
+            .catch(console.log)
     })
 }
 

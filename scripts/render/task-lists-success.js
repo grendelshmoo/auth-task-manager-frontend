@@ -53,7 +53,5 @@ function deleteTask() {
 
 module.exports = {
   getTasks,
-  completeTask,
-  // getTasksByList
-  // getTasksAfterCreated
+  completeTask
 }
