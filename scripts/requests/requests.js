@@ -1,5 +1,7 @@
 const axios = require('axios')
 baseURL = `https://atm-server-g92.herokuapp.com/api`
+const token = localStorage.getItem('token')
+
 
 function createTask(newTitle, newDesc, listId) {
   return axios(`${baseURL}/lists/${listId}/tasks`, {
@@ -19,6 +21,14 @@ function createTask(newTitle, newDesc, listId) {
 function destroyList(id) {
   return axios({
     url: `${baseURL}/lists/${id}`,
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+    method: 'DELETE'
+  })
+  // .then(() => getTasks())
+  .catch(console.log)
+}
 
 function finishTask(listId, taskId) {
   const body = {
