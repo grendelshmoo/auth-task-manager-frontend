@@ -66,7 +66,7 @@ function destroyTask(listId, taskId) {
     },
     method: 'DELETE'
   })
-  // .then(() => getTasks())
+  // .then(() => taskP())
   .catch(console.log)
 
 }

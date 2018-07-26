@@ -95,7 +95,26 @@ function renderTasksById(lists) {
       // console.log("I am a taskListId", taskListId)
       lists.map(list => {
         if (list.id === parseInt(taskListId)) {
+          // renderTasksById(lists)
+
           populateTaskList(list.tasks)
+          aTags.forEach((tag) => {
+            // if (tag.classList.contains('active')) {
+            //   tag.children[0].classList.add('d-none')
+            // } else {
+            //   tag.children[0].classList.remove('d-none')
+            // }
+          })
+          removeButtons.map(el => {
+            el.addEventListener('click', (e) => {
+              let listId = e.target.dataset.id
+              request.destroyList(listId)
+              taskPage()
+              // console.log('destroyed')
+
+            })
+          })
+
         }
       })
     })
@@ -105,11 +124,13 @@ function renderTasksById(lists) {
 
   //for every a tag, look for the active class, if it has one add the d-none class.
   //  need to find the right way to have it re-render the list after this.
-  aTags.forEach((tag) => {
-    if (tag.classList.contains('active')) {
-      tag.children[0].classList.add('d-none')
-    }
-  })
+  // aTags.forEach((tag) => {
+  //   if (tag.classList.contains('active')) {
+  //     tag.children[0].classList.add('d-none')
+  //   } else {
+  //     tag.children[0].classList.remove('d-none')
+  //   }
+  // })
   removeButtons.map(el => {
     el.addEventListener('click', (e) => {
       let listId = e.target.dataset.id
