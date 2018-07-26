@@ -18,7 +18,7 @@ function getTasks(activeListId) {
         //renderNewList()
       } else {
         const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
-        console.log(lists, activeListId)
+        // console.log(lists, activeListId)
         renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
         renderTaskList.renderPopulateLists(lists)
       }
@@ -40,8 +40,8 @@ function completeTask(listId, taskId) {
 }
 
 
-function deleteTask() {
-
+function deleteTask(listId, taskId) {
+console.log(listId, taskId)
 }
 
 module.exports = {
