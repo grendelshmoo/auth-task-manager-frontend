@@ -102,9 +102,9 @@ function renderTasksById(lists) {
   })
 
   const removeButtons = Array.from(document.querySelectorAll('#remove-list-button'))
+
   //for every a tag, look for the active class, if it has one add the d-none class.
   //  need to find the right way to have it re-render the list after this.
-
   aTags.forEach((tag) => {
     if (tag.classList.contains('active')) {
       tag.children[0].classList.add('d-none')
@@ -113,7 +113,7 @@ function renderTasksById(lists) {
   removeButtons.map(el => {
     el.addEventListener('click', (e) => {
       let listId = e.target.dataset.id
-      request.destroy(listId)
+      request.destroyList(listId)
       // Once the list is destroyed need to figure out how to re-render the list again.
       console.log('destroyed')
 

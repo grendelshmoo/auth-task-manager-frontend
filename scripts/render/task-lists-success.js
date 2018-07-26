@@ -1,6 +1,7 @@
 const axios = require('axios')
 const taskPage = require('./render-tasklist').taskPage
 
+
 function completeTask(listId, taskId) {
   const body = {
     'completed': true
@@ -16,8 +17,8 @@ function completeTask(listId, taskId) {
 }
 
 
-function deleteTask() {
-
+function deleteTask(listId, taskId) {
+console.log(listId, taskId)
 }
 
 module.exports = {

@@ -16,6 +16,9 @@ function createTask(newTitle, newDesc, listId) {
     .catch(console.log)
 }
 
+function destroyList(id) {
+  return axios({
+    url: `${baseURL}/lists/${id}`,
 
 function finishTask(listId, taskId) {
   const body = {
@@ -45,14 +48,17 @@ function update(id, body) {
   return axios.put(`${baseURL}/posts/${id}`, body)
 }
 
-function destroy(id) {
-  return axios(`${baseURL}/lists/${id}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      method: 'DELETE'
-    })
-    .catch(console.log)
+function destroyTask(listId, taskId) {
+  return axios({
+    url: `${baseURL}/lists/${listId}/tasks/${taskId}`,
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+    method: 'DELETE'
+  })
+  // .then(() => getTasks())
+  .catch(console.log)
+
 }
 
 
@@ -89,9 +95,10 @@ function tasksOfList() {
 
 module.exports = {
   createTask,
+  destroyList,
+  destroyTask,
   createNewList,
   tasksOfList,
-  destroy,
   loginPost,
   signup,
   finishTask
