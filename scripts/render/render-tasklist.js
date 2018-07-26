@@ -11,6 +11,7 @@ const newListLink = require('../templates/new-list').newList()
 const formNewList = require('../create-list/new-list').formNewList
 const newList = require('../create-list/new-list').newList
 const removeTask = require('../crud-tasks/remove-task').removeTask
+const mapRemoveList = require('../create-list/destroy-list').mapRemoveList
 
 
 // ***** Create global variable *****
@@ -59,7 +60,6 @@ function setMinTaskListId(lists) {
   })
   // console.log("I am arrListIds", arrListIds)
   taskListId = Math.min(...arrListIds)
-  // console.log(taskListId)
 }
 
 // render the list of titles on left column
@@ -78,6 +78,8 @@ function renderListsGroupItems(lists) {
   }).join('')
 
   document.getElementById('left-list').innerHTML += listView
+  // ??
+  mapRemoveList()
 }
 
 
@@ -96,52 +98,14 @@ function renderTasksById(lists) {
       // console.log("I am a taskListId", taskListId)
       lists.map(list => {
         if (list.id === parseInt(taskListId)) {
-          // renderTasksById(lists)
-
           populateTaskList(list.tasks)
-          aTags.forEach((tag) => {
-            // if (tag.classList.contains('active')) {
-            //   tag.children[0].classList.add('d-none')
-            // } else {
-            //   tag.children[0].classList.remove('d-none')
-            // }
-          })
-          removeButtons.map(el => {
-            el.addEventListener('click', (e) => {
-              let listId = e.target.dataset.id
-              request.destroyList(listId)
-              taskPage()
-              // console.log('destroyed')
-
-            })
-          })
 
         }
       })
     })
   })
 
-  const removeButtons = Array.from(document.querySelectorAll('#remove-list-button'))
-
-  //for every a tag, look for the active class, if it has one add the d-none class.
-  //  need to find the right way to have it re-render the list after this.
-  // aTags.forEach((tag) => {
-  //   if (tag.classList.contains('active')) {
-  //     tag.children[0].classList.add('d-none')
-  //   } else {
-  //     tag.children[0].classList.remove('d-none')
-  //   }
-  // })
-  removeButtons.map(el => {
-    el.addEventListener('click', (e) => {
-      let listId = e.target.dataset.id
-      request.destroyList(listId)
-      taskPage()
-      console.log('destroyed')
-
-    })
-  })
-
+  // put mapRemoveList here
 }
 
 
@@ -217,10 +181,26 @@ function taskPage() {
         formNewList(centerColumn)
       } else {
         if (!taskListId) setMinTaskListId(lists)
+
         const activeList = lists.find(ele => ele.id == taskListId)
-        renderTaskList(activeList.tasks)
-        // renderTaskList()
-        renderPopulateLists(lists)
+        console.log("this is activeList", activeList)
+
+        if (activeList) {
+          renderTaskList(activeList.tasks)
+          renderPopulateLists(lists)
+
+        } else {
+          console.log("the else block")
+          if (lists.length) {
+            renderTaskList(lists[0].tasks)
+            renderPopulateLists(lists)
+          } else {
+            leftColumn.innerHTML = ''
+            centerColumn.innerHTML = newListLink
+            rightColumn.innerHTML = ''
+            formNewList(centerColumn)
+          }
+        }
       }
     })
     .catch(console.log)
