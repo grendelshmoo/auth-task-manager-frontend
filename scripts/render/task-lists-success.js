@@ -1,17 +1,14 @@
-const axios = require('axios')
 const renderTaskList = require('./render-tasklist')
-const templates = require('../templates/lists')
 const renderNewList = require('../create-list/new-list').newList
 const leftColumn = document.getElementById('left-column')
 const centerColumn = document.getElementById('center-column')
 const rightColumn = document.getElementById('right-column')
+const axios = require('axios')
+
 
 function getTasks(activeListId) {
-  return axios.get('https://atm-server-g92.herokuapp.com/api/lists', {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
+  const request = require('../requests/requests')
+  return request.tasksOfList()
     .then(res => {
       const lists = res.data.lists
       console.log("Muahhhhh", lists)
@@ -30,6 +27,7 @@ function getTasks(activeListId) {
 
       }
     })
+    .catch(console.log)
 }
 
 function completeTask(listId, taskId) {

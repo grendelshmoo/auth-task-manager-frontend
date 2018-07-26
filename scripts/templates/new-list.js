@@ -10,7 +10,18 @@ function newList () {
     `
 }
 
-
+function createdList (newTitle) {
+    return `
+    <div class="card text-center mt-5">
+        <div class="card-body">
+            <h5 class="card-title">Your list has been created.</h5>
+            <p class="card-text">${newTitle}</p>
+            <a href="#!/lists" id='created-list-btn' class="btn btn-outline-success btn-sm">Check it out</a>
+        </div>
+    </div>
+    `
+}
 module.exports = {
-    newList
+    newList,
+    createdList
 }

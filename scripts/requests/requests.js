@@ -1,11 +1,10 @@
 const axios = require('axios')
 baseURL = `https://atm-server-g92.herokuapp.com/api`
-const token = localStorage.getItem('token')
 
 function createTask(newTitle, newDesc, listId) {
   return axios(`${baseURL}/lists/${listId}/tasks`, {
       headers: {
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${localStorage.getItem('token')}`
       },
       data: {
         title: newTitle,
@@ -17,10 +16,23 @@ function createTask(newTitle, newDesc, listId) {
     .catch(console.log)
 }
 
+
+function finishTask(listId, taskId) {
+  const body = {
+    'completed': true
+  }
+  return axios.patch(`${baseURL}/lists/${listId}/tasks/${taskId}`, body, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+}
+
+
 function createNewList(newTitle) {
   return axios(`${baseURL}/lists`, {
     headers: {
-      authorization: `Bearer ${token}`
+      authorization: `Bearer ${localStorage.getItem('token')}`
     },
     data: {
       title: newTitle
@@ -36,11 +48,10 @@ function update(id, body) {
 function destroy(id) {
   return axios(`${baseURL}/lists/${id}`, {
       headers: {
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${localStorage.getItem('token')}`
       },
       method: 'DELETE'
     })
-    // .then(() => getTasks())
     .catch(console.log)
 }
 
@@ -65,15 +76,23 @@ function signup(firstName, lastName, email, password) {
 }
 
 // TASK LIST
-function taskList() {
-  return axios.get(`${baseURL}/lists`)
+function tasksOfList() {
+  return axios.get(`${baseURL}/lists`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
 }
+
+
 
 
 module.exports = {
   createTask,
+  createNewList,
+  tasksOfList,
   destroy,
   loginPost,
   signup,
-  createNewList
+  finishTask
 }
