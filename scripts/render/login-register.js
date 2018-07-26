@@ -2,8 +2,8 @@ const loginTemplate = require('../templates/login-register').loginTemplate
 const registerTemplate = require('../templates/login-register').registerTemplate
 const loginErr = require('../templates/login-register').loginIssue
 const request = require('../requests/requests')
-const getTasks = require('./task-lists-success').getTasks
 const register = require('../register/register').register
+const taskPage = require('./render-tasklist').taskPage
 
 // login
 function login() {
@@ -18,7 +18,7 @@ function login() {
 				const token = localStorage.setItem('token', response.data.token)
 			})
 			.then(() => {
-				getTasks()
+				taskPage()
 			})
 			.catch(error => {
 				document.querySelector('#center-column').innerHTML += loginErr()

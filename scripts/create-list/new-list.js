@@ -1,11 +1,15 @@
 const newListLink = require('../templates/new-list').newList()
 const createdList = require('../templates/new-list').createdList
 
-function newList(leftColumn, centerColumn, rightColumn) {
+function newList() {
+    const centerColumn = document.getElementById('center-column')
+    const leftColumn = document.getElementById('left-column')
+    const rightColumn = document.getElementById('right-column')
     const createList = document.querySelector('#new-list-link')
     console.log("This is newList")
     createList.addEventListener('click', function (event) {
         leftColumn.innerHTML = ''
+        centerColumn.innerHTML = ''
         centerColumn.innerHTML = newListLink
         rightColumn.innerHTML = ''
         formNewList(centerColumn)
@@ -21,7 +25,6 @@ function formNewList(centerColumn) {
         const newTitle = event.target.newList.value
         request.createNewList(newTitle)
             .then(response => {
-                // const getTasks = require('../render/task-lists-success').getTasks
                 console.log("I am inside form new list again", response)
                 centerColumn.innerHTML = ''
                 centerColumn.innerHTML = createdList(newTitle)
@@ -31,7 +34,6 @@ function formNewList(centerColumn) {
                 document.querySelector('#created-list-btn').addEventListener('click', function (event) {
                     console.log("Hey, clicking the button of creating new list")
                     renderTaskPage()
-                    // getTasks()
                 })
             })
             .catch(console.log)
