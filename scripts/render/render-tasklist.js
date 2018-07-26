@@ -10,6 +10,7 @@ const templates = require('../templates/lists')
 const newListLink = require('../templates/new-list').newList()
 const formNewList = require('../create-list/new-list').formNewList
 const newList = require('../create-list/new-list').newList
+const removeTask = require('../crud-tasks/remove-task').removeTask
 
 
 // ***** Create global variable *****
@@ -52,7 +53,7 @@ function logOut() {
 }
 
 // get min task list id
-function setMinTaskListId(lists){
+function setMinTaskListId(lists) {
   const arrListIds = lists.map(list => {
     return list.id
   })
@@ -141,6 +142,7 @@ function populateTaskList(tasks) {
   })
   // moving completed cards from doing to done
   movingDoingToDone()
+  removeTask()
 }
 
 
@@ -158,7 +160,7 @@ function createNewTask(lists) {
 
 
 function movingDoingToDone() {
-  const completeTask = require('./task-lists-success').completeTask
+  const completeTask = require('../crud-tasks/complete-task').completeTask
 
   const completeBtns = Array.from(document.querySelectorAll(".complete"))
   completeBtns.map(btn => {
@@ -193,7 +195,7 @@ function taskPage() {
         rightColumn.innerHTML = ''
         formNewList(centerColumn)
       } else {
-        if(!taskListId) setMinTaskListId(lists)
+        if (!taskListId) setMinTaskListId(lists)
         const activeList = lists.find(ele => ele.id == taskListId)
         renderTaskList(activeList.tasks)
         // renderTaskList()
