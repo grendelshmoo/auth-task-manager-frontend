@@ -7,7 +7,7 @@ function tasklistMenu() {
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id='new-list-link' href="#!/lists">New List</a>
+      <a class="nav-link" id='new-list-link' href="#!/newlist">New List</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id='logout-link' href="#!/logout">Log Out</a>
