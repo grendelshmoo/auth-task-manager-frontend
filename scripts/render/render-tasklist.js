@@ -13,7 +13,7 @@ const newList = require('../create-list/new-list').newList
 
 
 // ***** Create global variable *****
-let taskListId 
+let taskListId
 
 // **** Render the first list ****
 
@@ -56,12 +56,12 @@ function setMinTaskListId(lists){
   const arrListIds = lists.map(list => {
     return list.id
   })
-  console.log("I am arrListIds", arrListIds)
+  // console.log("I am arrListIds", arrListIds)
   taskListId = Math.min(...arrListIds)
-  console.log(taskListId)
+  // console.log(taskListId)
 }
 
-// render the list of titles on left column 
+// render the list of titles on left column
 function renderListsGroupItems(lists) {
   lists.sort(function (a, b) {
     return a.id - b.id
@@ -92,7 +92,7 @@ function renderTasksById(lists) {
       rightColumn.innerHTML = tasklistTemplate.right()
 
       taskListId = event.target.dataset.id
-      console.log("I am a taskListId", taskListId)
+      // console.log("I am a taskListId", taskListId)
       lists.map(list => {
         if (list.id === parseInt(taskListId)) {
           populateTaskList(list.tasks)
@@ -114,7 +114,7 @@ function renderTasksById(lists) {
     el.addEventListener('click', (e) => {
       let listId = e.target.dataset.id
       request.destroyList(listId)
-      // Once the list is destroyed need to figure out how to re-render the list again.
+      taskPage()
       console.log('destroyed')
 
     })
@@ -124,7 +124,7 @@ function renderTasksById(lists) {
 
 
 
-// populate cards on center and right columns 
+// populate cards on center and right columns
 function populateTaskList(tasks) {
   tasks.map(task => {
     // change global variable taskListId here, which is the list id
@@ -179,7 +179,7 @@ function renderPopulateLists(lists) {
 }
 
 
-/// function to render task list page 
+/// function to render task list page
 function taskPage() {
   const request = require('../requests/requests')
   return request.tasksOfList()

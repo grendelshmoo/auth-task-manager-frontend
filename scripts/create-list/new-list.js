@@ -6,7 +6,7 @@ function newList() {
     const leftColumn = document.getElementById('left-column')
     const rightColumn = document.getElementById('right-column')
     const createList = document.querySelector('#new-list-link')
-    console.log("This is newList")
+    // console.log("This is newList")
     createList.addEventListener('click', function (event) {
         leftColumn.innerHTML = ''
         centerColumn.innerHTML = ''
