@@ -53,6 +53,7 @@ function createNewList(newTitle) {
 }
 
 function destroyTask(listId, taskId) {
+
   return axios(`${baseURL}/lists/${listId}/tasks/${taskId}`, {
       headers: {
         authorization: `Bearer ${token}`
@@ -60,6 +61,7 @@ function destroyTask(listId, taskId) {
       method: 'DELETE'
     })
     // .then(() => getTasks())
+
 }
 
 
