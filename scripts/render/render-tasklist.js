@@ -7,24 +7,31 @@ const leftColumn = document.getElementById('left-column')
 const rightColumn = document.getElementById('right-column')
 const templates = require('../templates/lists')
 
+const newListLink = require('../templates/new-list').newList()
+const formNewList = require('../create-list/new-list').formNewList
+const newListListener = require('../create-list/new-list').newList
 
 // **** Render the first list ****
 
-function renderTaskListPage() {
+function taskNav() {
   // set the navbar
   const navSelect = document.getElementById('navbar-select')
   navSelect.innerHTML = taskmenuTemplate()
 
+  // add click to new list
+  newListListener(leftColumn, centerColumn, rightColumn)
+
+  // add click to log out on navbar
   const logoutSelect = document.getElementById('logout-link')
   logoutSelect.addEventListener('click', logOut)
 }
 
 function renderTaskList(tasks) {
-  renderTaskListPage()
+  taskNav()
   leftColumn.innerHTML = tasklistTemplate.left()
   centerColumn.innerHTML = tasklistTemplate.center()
   rightColumn.innerHTML = tasklistTemplate.right()
-  populateTaskList(tasks)
+  populateTaskList(tasks) // testing
 }
 
 function logOut() {
@@ -36,7 +43,7 @@ function logOut() {
   rightColumn.innerHTML = null
 }
 
-// render the list group on the left
+// render the list of titles on left column 
 function renderListsGroupItems(lists) {
   let listView = lists.map(list => {
     let isActive = ''
@@ -87,22 +94,17 @@ function renderTasksById(lists) {
       request.destroy(listId)
       // Once the list is destroyed need to figure out how to re-render the list again.
       console.log('destroyed')
-      
+
     })
   })
 
 }
 
-function addActive() {
-  const aTags = Array.from(document.querySelectorAll('a.list-group-item'))
-  aTags[0].classList.add('active')
-}
-
 // ***** Create global variable *****
 let taskListId = 1
 
+// populate cards on center and right columns 
 function populateTaskList(tasks) {
-  // const tasks = list.tasks
   tasks.map(task => {
     // change global variable taskListId here, which is the list id
     taskListId = task.list_id
@@ -124,8 +126,8 @@ function populateTaskList(tasks) {
 function createNewTask(lists) {
   const getTasks = require('./task-lists-success').getTasks
   const taskForm = document.querySelector('#task-form')
-  taskForm.addEventListener('submit', function (e) {
-    e.preventDefault()
+  taskForm.addEventListener('submit', function (event) {
+    event.preventDefault()
     const newTitle = document.getElementById('task-title').value
     const newDesc = document.getElementById('task-description').value
     console.log("I am a taskListId", taskListId)
@@ -156,12 +158,38 @@ function renderPopulateLists(lists) {
   // addActive()
 }
 
+
+/// function to render task list page 
+
+function taskPage() {
+  const request = require('../requests/requests')
+  return request.tasksOfList()
+    .then(res => {
+      const lists = res.data.lists
+      taskNav()
+      // new user, no list
+      if (lists.length === 0) {
+        leftColumn.innerHTML = ''
+        centerColumn.innerHTML = newListLink
+        rightColumn.innerHTML = ''
+        formNewList(centerColumn)
+      } else {
+        const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
+        renderTaskList(activeList.tasks)
+        renderPopulateLists(lists)
+      }
+    })
+    .catch(console.log)
+}
+
+
 module.exports = {
   renderListsGroupItems,
   renderTasksById,
   renderTaskList,
-  renderTaskListPage,
+  taskNav,
   populateTaskList,
   renderPopulateLists,
   movingDoingToDone,
+  taskPage
 }
