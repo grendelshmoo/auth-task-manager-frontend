@@ -2,8 +2,11 @@ const registerErr = require('../templates/login-register').registerIssue
 const request = require('../requests/requests')
 const registerErrMore = require('../templates/login-register').registerIssueMore
 const renderLogin = require('../render/login-register').renderLogin
-const renderNewList = require('../create-list/new-list').newList
-const renderTaskListPage = require('../render/render-tasklist').renderTaskListPage
+const newList = require('../create-list/new-list').newList
+const taskNav = require('../render/render-tasklist').taskNav
+const newListLink = require('../templates/new-list').newList()
+const formNewList = require('../create-list/new-list').formNewList
+
 
 function register() {
     document.querySelector('#register-form').addEventListener('submit', function (event) {
@@ -11,27 +14,29 @@ function register() {
         const firstName = event.target.firstName.value
         const lastName = event.target.lastName.value
         const email = event.target.email.value
-        const password = event.target.password.value
-
         const pass = document.querySelector('#register-password')
         const confirmed = document.querySelector('#password-confirm')
+
         if (pass.value === confirmed.value) {
             console.log("This is register")
-            request.signup(firstName, lastName, email, password)
+            request.signup(firstName, lastName, email, pass.value)
                 .then(response => {
                     const token = localStorage.setItem('token', response.data.token)
                     console.log('Hey there, look at me')
                 })
                 .then(() => {
                     // renderLogin()
-                    renderTaskListPage()
+                    taskNav()
+                    const centerColumn = document.getElementById('center-column')
+                    centerColumn.innerHTML = ''
+                    centerColumn.innerHTML = newListLink
+                    formNewList(centerColumn)
                 })
                 .then(() => {
-                    // finish new list function before forwarding to it here.
-                    renderNewList()
+
                 })
                 .catch(err => {
-                    document.querySelector('#center-column').innerHTML += registerErr()
+                    console.log(err)
                 })
         } else {
             document.querySelector('#center-column').innerHTML += registerErrMore()

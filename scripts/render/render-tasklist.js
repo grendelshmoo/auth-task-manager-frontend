@@ -9,7 +9,11 @@ const templates = require('../templates/lists')
 
 const newListLink = require('../templates/new-list').newList()
 const formNewList = require('../create-list/new-list').formNewList
-const newListListener = require('../create-list/new-list').newList
+const newList = require('../create-list/new-list').newList
+
+
+// ***** Create global variable *****
+let taskListId 
 
 // **** Render the first list ****
 
@@ -18,8 +22,12 @@ function taskNav() {
   const navSelect = document.getElementById('navbar-select')
   navSelect.innerHTML = taskmenuTemplate()
 
+  //add event listener to all task
+  document.querySelector('#all-tasks-link').addEventListener('click', function (event) {
+    taskPage()
+  })
   // add click to new list
-  newListListener(leftColumn, centerColumn, rightColumn)
+  newList()
 
   // add click to log out on navbar
   const logoutSelect = document.getElementById('logout-link')
@@ -43,21 +51,34 @@ function logOut() {
   rightColumn.innerHTML = null
 }
 
+// get min task list id
+function setMinTaskListId(lists){
+  const arrListIds = lists.map(list => {
+    return list.id
+  })
+  console.log("I am arrListIds", arrListIds)
+  taskListId = Math.min(...arrListIds)
+  console.log(taskListId)
+}
+
 // render the list of titles on left column 
 function renderListsGroupItems(lists) {
+  lists.sort(function (a, b) {
+    return a.id - b.id
+  })
   let listView = lists.map(list => {
     let isActive = ''
-    if (list.id === taskListId) {
+    if (!taskListId) {
+      setMinTaskListId(lists)
+    } else if (list.id === taskListId) {
       isActive = 'active'
     }
-
     return templates.listTemplate(list, isActive)
   }).join('')
 
-
-
   document.getElementById('left-list').innerHTML += listView
 }
+
 
 // render center and right column with the coressponding id
 function renderTasksById(lists) {
@@ -70,9 +91,10 @@ function renderTasksById(lists) {
       rightColumn.innerHTML = ""
       rightColumn.innerHTML = tasklistTemplate.right()
 
-      const listItemId = event.target.dataset.id
+      taskListId = event.target.dataset.id
+      console.log("I am a taskListId", taskListId)
       lists.map(list => {
-        if (list.id === parseInt(listItemId)) {
+        if (list.id === parseInt(taskListId)) {
           populateTaskList(list.tasks)
         }
       })
@@ -100,8 +122,7 @@ function renderTasksById(lists) {
 
 }
 
-// ***** Create global variable *****
-let taskListId = 1
+
 
 // populate cards on center and right columns 
 function populateTaskList(tasks) {
@@ -124,7 +145,6 @@ function populateTaskList(tasks) {
 
 
 function createNewTask(lists) {
-  const getTasks = require('./task-lists-success').getTasks
   const taskForm = document.querySelector('#task-form')
   taskForm.addEventListener('submit', function (event) {
     event.preventDefault()
@@ -132,7 +152,7 @@ function createNewTask(lists) {
     const newDesc = document.getElementById('task-description').value
     console.log("I am a taskListId", taskListId)
     request.createTask(newTitle, newDesc, taskListId)
-      .then(() => getTasks(taskListId))
+      .then(() => taskPage())
   })
 }
 
@@ -160,7 +180,6 @@ function renderPopulateLists(lists) {
 
 
 /// function to render task list page 
-
 function taskPage() {
   const request = require('../requests/requests')
   return request.tasksOfList()
@@ -174,8 +193,10 @@ function taskPage() {
         rightColumn.innerHTML = ''
         formNewList(centerColumn)
       } else {
-        const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
+        if(!taskListId) setMinTaskListId(lists)
+        const activeList = lists.find(ele => ele.id == taskListId)
         renderTaskList(activeList.tasks)
+        // renderTaskList()
         renderPopulateLists(lists)
       }
     })

@@ -1,34 +1,5 @@
-const renderTaskList = require('./render-tasklist')
-const renderNewList = require('../create-list/new-list').newList
-const leftColumn = document.getElementById('left-column')
-const centerColumn = document.getElementById('center-column')
-const rightColumn = document.getElementById('right-column')
 const axios = require('axios')
-
-
-function getTasks(activeListId) {
-  const request = require('../requests/requests')
-  return request.tasksOfList()
-    .then(res => {
-      const lists = res.data.lists
-      console.log("Muahhhhh", lists)
-      if (lists.length === 0) {
-        console.log('The list is empty right now.')
-        renderTaskList.renderTaskListPage()
-
-        renderNewList(leftColumn, centerColumn, rightColumn)
-      } else {
-        const activeList = activeListId ? lists.find(ele => ele.id === activeListId) : lists[0]
-        console.log(lists, activeListId)
-        renderTaskList.renderTaskList(activeList.tasks) // no one clicks the page, render the first item
-        renderTaskList.renderPopulateLists(lists)
-        console.log(document.querySelector('#new-list-link'))
-        renderNewList(leftColumn, centerColumn, rightColumn)
-
-      }
-    })
-    .catch(console.log)
-}
+const taskPage = require('./render-tasklist').taskPage
 
 function completeTask(listId, taskId) {
   const body = {
@@ -40,7 +11,7 @@ function completeTask(listId, taskId) {
     }
   }).then(response => {
     // render the whole task page again.
-    getTasks(listId)
+    taskPage()
   })
 }
 
@@ -50,6 +21,5 @@ function deleteTask() {
 }
 
 module.exports = {
-  getTasks,
   completeTask
 }
