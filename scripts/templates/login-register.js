@@ -1,5 +1,5 @@
 function loginTemplate() {
-    return `
+  return `
     <div class="card border-dark mb-3" style="max-width: 18rem;">
       <div class="card-body text-dark">
         <h2 class="card-title text-center">Login</h2>
@@ -17,10 +17,10 @@ function loginTemplate() {
       </div>
     </div>
     `
-  }
+}
 
-  function registerTemplate() {
-    return `
+function registerTemplate() {
+  return `
     <div class="card border-dark mb-3">
     <div class="card-body text-dark">
       <h2 class="card-title text-center">Register</h2>
@@ -55,31 +55,30 @@ function loginTemplate() {
   </div>
   </div>
   `
-  }
+}
 
-  function loginIssue () {
-    return `
+function loginIssue() {
+  return `
     <div class='p-3 mt-2 bg-warning'>Incorrect username or password.</div>
     `
-  }
+}
 
-  function registerIssue () {
-    return `
+function registerIssue() {
+  return `
     <div class='p-3 mt-2 bg-warning'>Passwords do not match.</div>
     `
-  }
+}
 
-  function registerIssueMore () {
-    return `
+function registerIssueMore() {
+  return `
     <div class='p-3 mt-2 bg-warning'>Please check all your input fields.</div>
     `
-  }
-  
-  module.exports = {
-    registerTemplate,
-    loginTemplate, 
-    loginIssue,
-    registerIssue,
-    registerIssueMore
-  }
-  
+}
+
+module.exports = {
+  registerTemplate,
+  loginTemplate,
+  loginIssue,
+  registerIssue,
+  registerIssueMore
+}

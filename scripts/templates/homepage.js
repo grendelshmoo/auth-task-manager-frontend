@@ -1,5 +1,5 @@
 function homeTemplate() {
-    return `  
+  return `
     <!-- Begin primary content container  -->
     <div class="container p-5">
       <div class="row">
@@ -15,5 +15,5 @@ function homeTemplate() {
 }
 
 module.exports = {
-    homeTemplate
+  homeTemplate
 }

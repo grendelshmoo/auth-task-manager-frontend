@@ -1,5 +1,5 @@
-function newList () {
-    return `
+function newList() {
+  return `
     <form id='create-new-list'>
         <div class="form-group">
             <label for="new-list">Create a New List</label>
@@ -10,8 +10,8 @@ function newList () {
     `
 }
 
-function createdList (newTitle) {
-    return `
+function createdList(newTitle) {
+  return `
     <div class="card text-center mt-5">
         <div class="card-body">
             <h5 class="card-title">Your list has been created.</h5>
@@ -22,6 +22,6 @@ function createdList (newTitle) {
     `
 }
 module.exports = {
-    newList,
-    createdList
+  newList,
+  createdList
 }

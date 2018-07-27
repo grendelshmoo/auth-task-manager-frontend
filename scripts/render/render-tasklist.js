@@ -25,7 +25,7 @@ function taskNav() {
   navSelect.innerHTML = taskmenuTemplate()
 
   //add event listener to all task
-  document.querySelector('#all-tasks-link').addEventListener('click', function (event) {
+  document.querySelector('#all-tasks-link').addEventListener('click', function(event) {
     taskPage()
   })
   // add click to new list
@@ -58,13 +58,12 @@ function setMinTaskListId(lists) {
   const arrListIds = lists.map(list => {
     return list.id
   })
-  // console.log("I am arrListIds", arrListIds)
   taskListId = Math.min(...arrListIds)
 }
 
 // render the list of titles on left column
 function renderListsGroupItems(lists) {
-  lists.sort(function (a, b) {
+  lists.sort(function(a, b) {
     return a.id - b.id
   })
   let listView = lists.map(list => {
@@ -95,7 +94,6 @@ function renderTasksById(lists) {
       rightColumn.innerHTML = tasklistTemplate.right()
 
       taskListId = event.target.dataset.id
-      // console.log("I am a taskListId", taskListId)
       lists.map(list => {
         if (list.id === parseInt(taskListId)) {
           populateTaskList(list.tasks)
@@ -104,11 +102,7 @@ function renderTasksById(lists) {
       })
     })
   })
-
-  // put mapRemoveList here
 }
-
-
 
 // populate cards on center and right columns
 function populateTaskList(tasks) {
@@ -133,11 +127,10 @@ function populateTaskList(tasks) {
 
 function createNewTask(lists) {
   const taskForm = document.querySelector('#task-form')
-  taskForm.addEventListener('submit', function (event) {
+  taskForm.addEventListener('submit', function(event) {
     event.preventDefault()
     const newTitle = document.getElementById('task-title').value
     const newDesc = document.getElementById('task-description').value
-    console.log("I am a taskListId", taskListId)
     request.createTask(newTitle, newDesc, taskListId)
       .then(() => taskPage())
   })
@@ -149,7 +142,7 @@ function movingDoingToDone() {
 
   const completeBtns = Array.from(document.querySelectorAll(".complete"))
   completeBtns.map(btn => {
-    btn.addEventListener('click', function (event) {
+    btn.addEventListener('click', function(event) {
       const taskId = event.target.dataset.taskid
       const listId = parseInt(event.target.dataset.listid)
       completeTask(listId, taskId)
@@ -162,7 +155,6 @@ function renderPopulateLists(lists) {
   renderListsGroupItems(lists)
   renderTasksById(lists)
   createNewTask(lists)
-  // addActive()
 }
 
 
@@ -183,14 +175,12 @@ function taskPage() {
         if (!taskListId) setMinTaskListId(lists)
 
         const activeList = lists.find(ele => ele.id == taskListId)
-        console.log("this is activeList", activeList)
 
         if (activeList) {
           renderTaskList(activeList.tasks)
           renderPopulateLists(lists)
 
         } else {
-          console.log("the else block")
           if (lists.length) {
             renderTaskList(lists[0].tasks)
             renderPopulateLists(lists)
@@ -215,5 +205,6 @@ module.exports = {
   populateTaskList,
   renderPopulateLists,
   movingDoingToDone,
-  taskPage
+  taskPage,
+  setMinTaskListId
 }
